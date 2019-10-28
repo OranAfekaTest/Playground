@@ -1,0 +1,166 @@
+<div id="playgroundViewTemplate" ng-controller="PlaygroundController">
+  <ng-include src="'./app/components/menuBar/menuBarView.ejs'">
+    <!-- Menu Bar -->
+  </ng-include>
+  <ng-include src="'./app/components/alert/alertView.ejs'">
+    <!-- Alert message, if any -->
+  </ng-include>
+  <div class="container">
+    <!-- Explanation about playground content-->
+    <div class="row text-center">
+      <div class="col col-sm-12">
+        <h1>Welcome to <b>{{playground}}</b>!</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-sm-12 text-center">
+        <h2>This playground concentrates on the <i>{{playgroundTheme}}</i> theme.</h2>
+      </div>
+    </div>
+    <div ng-if='playgroundTheme == "animals"'>
+      <div class="row text-center">
+        <div class="col col-sm-12">
+          <p>Table below offers a glimpse of 1x3 sectors with animals.</p>
+          <p>Below animal avatar and description, you have available activities according to your role.</p>
+          <p>Each activity affects amount of your points.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Container with elements -->
+    <div class="row" id="tableWithElements">
+      <!-- Containter for editing an element-->
+      <div class="row text-center">
+        <form class="inputForm invisible secondLayer" name="editElementForm" id="editElementForm" action="javascript:void(0)">
+          <div class="form-group row">
+            <label for="editedLocationX" class="col-sm-2 col-form-label">Location X</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control inputField" name="editedLocationX" id="editedLocationX" placeholder="i.e. 1" ng-model="editedElement.locationX">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="editedLocationY" class="col-sm-2 col-form-label">Location Y</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="editedLocationY" id="editedLocationY" placeholder="i.e. 1" ng-model="editedElement.locationY">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="editedName" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control inputField" name="editedName" id="editedName" placeholder="i.e. Bear" ng-model="editedElement.name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="editedExpirationDate" class="col-sm-2 col-form-label">Expiration Date</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="editedExpirationDate" id="editedExpirationDate" placeholder="i.e. 2019-12-01T09:15:00" ng-model="editedElement.expirationDate">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="editedType" class="col-sm-2 col-form-label">Type</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="editedType" id="editedType" placeholder="i.e. Animal" ng-model="editedElement.type">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="editedAttributes" class="col-sm-2 col-form-label">Attributes</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="editedAttributes" id="editedAttributes" placeholder='i.e. {"favoriteFood": ["orange", "apple"]}' ng-model="editedElement.attributes">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-info submitButton" ng-click="submitEditedElement()">Submit edited element</button>
+            </div>
+            <div class="col-sm-6">
+              <button class="btn btn-warning submitButton" onclick="hideEditElementForm()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Container for adding new element -->
+      <div class="row text-center">
+        <form class="inputForm invisible secondLayer" name="addNewElementForm" id="addNewElementForm" action="javascript:void(0)">
+          <div class="form-group row">
+            <label for="locationX" class="col-sm-2 col-form-label">Location X</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="locationX" id="locationX" placeholder="i.e. 1" ng-model="element.locationX">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="locationY" class="col-sm-2 col-form-label">Location Y</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="locationY" id="locationY" placeholder="i.e. 1" ng-model="element.locationY">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="name" id="name" placeholder="i.e. Fox, Bear, Bison, Lion, Tiger, Wolf" ng-model="element.name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="expirationDate" class="col-sm-2 col-form-label">Expiration Date</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="expirationDate" id="expirationDate" placeholder="i.e. 2019-12-01T09:15:00" ng-model="element.expirationDate">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="type" class="col-sm-2 col-form-label">Type</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="type" id="type" placeholder="i.e. Animal" ng-model="element.type">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="attributes" class="col-sm-2 col-form-label">Attributes</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="attributes" id="attributes" placeholder='i.e. {"favoriteFood": ["orange", "apple"]}' ng-model="element.attributes">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-info submitButton" ng-click="addNewElement()">Submit new element</button>
+            </div>
+            <div class="col-sm-6">
+              <button class="btn btn-warning submitButton" onclick="hideElementSubmissionForm()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Container for showing elements-->
+      <div class="row firstLayer">
+        <div class="col-sm-{{12 / elements.length}}" ng-repeat="ngRepeatElement in elements">
+          <div class="card">
+            <div class="elementIconContainer">
+              <img class="card-img-top elementIcon" src="../../../assets/img/{{ngRepeatElement.name}}Icon.png" alt="Card image cap">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ngRepeatElement.name}}</h5>
+              <div ng-repeat="(key, value) in ngRepeatElement">
+                <p class="card-text">{{key}} : {{value}}</p>
+              </div><!-- ng-repeat for ngRepeatElement-->
+            </div>
+            <div class="optionsOnElement">
+              <button class="btn btn-info submitButton managerOption" ng-if="userRole == 'manager'" ng-click="editElement(ngRepeatElement)">Edit element {{ngRepeatElement.id}}</button>
+              <button class="btn btn-info submitButton playerOption" ng-if="userRole == 'player'" ng-click="feedAnimal(ngRepeatElement)">Feed {{ngRepeatElement.name}}</button>
+              <button class="btn btn-info submitButton playerOption" ng-if="userRole == 'player'" ng-click="pokeAnimal(ngRepeatElement)">Poke {{ngRepeatElement.name}}</button>
+            </div>
+          </div>
+        </div><!-- ng-repeat for elements-->
+      </div>
+    </div>
+    <!-- Options on table -->
+    <div class="row text-center firstLayer" id="optionsOnTable">
+      <!-- Pagination -->
+      <div class="col-sm-{{userRole == 'manager' ? 4 : 6}}">
+        <button class="btn btn-secondary submitButton" ng-click="previousPage()">Previous page</button>
+      </div>
+      <div class="col-sm-{{userRole == 'manager' ? 4 : 6}}">
+        <button class="btn btn-secondary submitButton" ng-click="nextPage()">Next page</button>
+      </div>
+      <!-- Manager options -->
+      <div class="col-sm-4" ng-if='userRole == "manager"'>
+        <button class="btn btn-success submitButton" onclick="showElementSubmissionForm()">Add new element</button>
+      </div>
+    </div>
+  </div>
+</div>

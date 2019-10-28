@@ -1,0 +1,152 @@
+<div id="playgroundViewTemplate" ng-controller="MessageBoardController">
+  <ng-include src="'./app/components/menuBar/menuBarView.ejs'">
+    <!-- Menu Bar -->
+  </ng-include>
+  <ng-include src="'./app/components/alert/alertView.ejs'">
+    <!-- Alert message, if any -->
+  </ng-include>
+  <div class="container">
+    <!-- Explanation about playground content-->
+    <div class="row text-center firstLayer">
+      <div class="col col-sm-12">
+        <h1>Welcome to <b>{{playground}}</b>!</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-sm-12 text-center firstLayer">
+        <h2>This is a page of message boards, belonging to {{playground}}.</h2>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col col-sm-12 firstLayer">
+        <p>Table below offers a glimpse of 1x3 sectors with message boards.</p>
+        <p>Below each board you have a button "Show messages".</p>
+        <p>Clicking on it, will summarize latest messages belonging to the board.</p>
+        <p>Clicking on a message, will show its content.</p>
+      </div>
+    </div>
+    <!-- Container with elements -->
+    <div class="row" id="tableWithElements">
+      <!-- Container for viewing messages -->
+      <div class="row text-center">
+        <div class="inputForm invisible secondLayer" id="messagesContainer">
+          <div class="form-group row" ng-repeat="ngRepeatMessage in messages">
+            <div class="col-sm-1">
+              <!-- For indentation purposes -->
+            </div>
+            <div class="col-sm-8">
+              creationDate : {{ngRepeatMessage.creationDate}}, playerEmail : {{ngRepeatMessage.playerEmail}}
+            </div>
+            <div class="col-sm-3">
+              <button class="btn btn-success submitButton" ng-click="viewMessage(ngRepeatMessage.id)">View message</button>
+            </div>
+          </div>
+          <div class="form-group row" ng-if="userRole == 'player'">
+            <label for="newMessage" class="col-sm-2 col-form-label">New message</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="newMessage" id="newMessage" placeholder="i.e. Hi" ng-model="message.content">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-info submitButton" ng-click="previousPageOfActivities()">Previous page</button>
+            </div>
+            <div class="col-sm-6">
+              <button class="btn btn-info submitButton" ng-click="nextPageOfActivities()">Next Page</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-info submitButton" ng-if="userRole == 'player'" ng-click="postMessage()">Post new message</button>
+            </div>
+            <div class="col-sm-{{userRole == 'player' ? 6 : 12}}">
+              <button class="btn btn-warning submitButton" ng-click="stopViewingMessages()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Container for adding new element -->
+      <div class="row text-center">
+        <form class="inputForm invisible secondLayer" name="addNewElementForm" id="addNewElementForm" action="javascript:void(0)">
+          <div class="form-group row">
+            <label for="locationX" class="col-sm-2 col-form-label">Location X</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="locationX" id="locationX" placeholder="i.e. 1" ng-model="element.locationX">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="locationY" class="col-sm-2 col-form-label">Location Y</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="locationY" id="locationY" placeholder="i.e. 1" ng-model="element.locationY">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="name" id="name" placeholder="i.e. MessageBoard" ng-model="element.name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="expirationDate" class="col-sm-2 col-form-label">Expiration Date</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="expirationDate" id="expirationDate" placeholder="i.e. 2019-12-01T09:15:00" ng-model="element.expirationDate">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="type" class="col-sm-2 col-form-label">Type</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="type" id="type" placeholder="i.e. Message board" ng-model="element.type">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="attributes" class="col-sm-2 col-form-label">Attributes</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control inputField" name="attributes" id="attributes" placeholder='i.e. {"theme": "Fun"}' ng-model="element.attributes">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6">
+              <button class="btn btn-info submitButton" ng-click="addNewElement()">Submit new element</button>
+            </div>
+            <div class="col-sm-6">
+              <button class="btn btn-warning submitButton" onclick="hideElementSubmissionForm()">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- Container for showing elements-->
+      <div class="row firstLayer">
+        <div class="col-sm-{{12 / elements.length}}" ng-repeat="ngRepeatElement in elements">
+          <div class="card">
+            <div class="elementIconContainer">
+              <img class="card-img-top elementIcon" src="../../../assets/img/{{ngRepeatElement.name}}Icon.png" alt="Card image cap">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ngRepeatElement.name}}</h5>
+              <div ng-repeat="(key, value) in ngRepeatElement">
+                <p class="card-text">{{key}} : {{value}}</p>
+              </div><!-- ng-repeat for ngRepeatElement-->
+            </div>
+            <div class="optionsOnElement">
+              <button class="btn btn-info submitButton" ng-click="viewMessages(ngRepeatElement)">Show summary of messages</button>
+            </div>
+          </div>
+        </div><!-- ng-repeat for elements-->
+      </div>
+    </div>
+    <!-- Options on table -->
+    <div class="row text-center firstLayer" id="optionsOnTable">
+      <!-- Pagination -->
+      <div class="col-sm-{{userRole == 'manager' ? 4 : 6}}">
+        <button class="btn btn-secondary submitButton" ng-click="previousPageOfElements()">Previous page</button>
+      </div>
+      <div class="col-sm-{{userRole == 'manager' ? 4 : 6}}">
+        <button class="btn btn-secondary submitButton" ng-click="nextPageOfElements()">Next page</button>
+      </div>
+      <!-- Manager options -->
+      <div class="col-sm-4" ng-if='userRole == "manager"'>
+        <button class="btn btn-success submitButton" onclick="showElementSubmissionForm()">Add new element</button>
+      </div>
+    </div>
+  </div><!-- end of Containter -->
+</div><!-- end of MessageBoardController -->

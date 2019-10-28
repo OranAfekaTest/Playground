@@ -1,0 +1,17 @@
+#menuNav .justifiedToIcon {
+  padding-top: 0.2em;
+}
+#menuNav .menuOption {
+  margin-right: 0.5em;
+  background-color: rgba(251, 165, 55, 0.85);
+  opacity: 0.85;
+  color: white;
+}
+#menuNav #userInfo {
+  margin-left: 2em;
+  display: -webkit-box;
+}
+#menuNav #userInfo .userDetail {
+  margin-left: 0.5em;
+  padding-top: 0.5em;
+}

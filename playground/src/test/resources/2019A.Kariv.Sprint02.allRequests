@@ -1,0 +1,1098 @@
+{
+	"info": {
+		"_postman_id": "f9a1f2ea-c5a2-46f6-8763-898509d69eba",
+		"name": "2019A.Kariv.Sprint02",
+		"description": "Tests for project's fascade",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register_validUserAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\": \"johndoe@work.com\",\r\n \"username\": \"john\",\r\n \"avatar\": \"https://www.blogtyrant.com/gravatar.jpg\",\r\n \"role\": \"player\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users"
+					]
+				},
+				"description": "response must contain:\n{\n\t\"email\": \"johndoe@work.com\",\n\t\"playground\": \"2019A.kariv\",\n\t\"username\": \"john\",\n\t\"avatar\": \"https://www.blogtyrant.com/gravatar.jpg\",\n\t\"role\": \"player\",\n\t\"points\": 0\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "register_invalidUserAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\": \"johndoe@work.com\",\r\n \"username\": \"\",\r\n \"avatar\": \"https://www.blogtyrant.com/gravatar.jpg\",\r\n \"role\": \"player\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "register_existingUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\": \"janedoe@work.com\",\r\n \"username\": \"john\",\r\n \"avatar\": \"https://www.blogtyrant.com/gravatar.jpg\",\r\n \"role\": \"player\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "verifyAccount_validParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users/confirm/2019A.kariv/johndoe@work.com/whynot",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users",
+						"confirm",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"whynot"
+					]
+				},
+				"description": "response must contain:\n{\n\t\"email\": \"johndoe@work.com\",\n\t\"playground\": \"2019A.kariv\",\n\t\"username\": \"john\",\n\t\"avatar\": \"https://www.blogtyrant.com/gravatar.jpg\",\n\t\"role\": \"player\",\n\t\"points\": 0\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "verifyAccount_invalidParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users/confirm/2019A.kariv/johndoe@work.com/wrongcode",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users",
+						"confirm",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"wrongcode"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "verifyAccount_alreadyVerifiedAccount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users/confirm/2019A.kariv/janedoe@work.com/whynot",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users",
+						"confirm",
+						"2019A.kariv",
+						"janedoe@work.com",
+						"whynot"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "login_validParams&verifiedAccount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users/login/2019A.kariv/johndoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users",
+						"login",
+						"2019A.kariv",
+						"johndoe@work.com"
+					]
+				},
+				"description": "response must contain:\n{\n\t\"email\": \"johndoe@work.com\",\n\t\"playground\": \"2019A.kariv\",\n\t\"username\": \"john\",\n\t\"avatar\": \"https://www.blogtyrant.com/gravatar.jpg\",\n\t\"role\": \"player\",\n\t\"points\": 0\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "login_invalidParams&verifiedAccount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users/login/notgoodname/johndoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users",
+						"login",
+						"notgoodname",
+						"johndoe@work.com"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "login_validParams&unverifiedAccount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users/login/2019A.kariv/janedoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users",
+						"login",
+						"2019A.kariv",
+						"janedoe@work.com"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "editAccount_validParams&validUserData",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"johndoe@gmail.com\",\n\t\"playground\": \"2019A.kariv\",\n\t\"username\": \"updatedJohnDoe\",\n\t\"avatar\": \"https://www.blogtyrant.com/gravatar.jpg\",\n\t\"role\": \"player\",\n\t\"points\": 0\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users/2019A.kariv/johndoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users",
+						"2019A.kariv",
+						"johndoe@work.com"
+					]
+				},
+				"description": "response must contain code 200."
+			},
+			"response": []
+		},
+		{
+			"name": "editAccount_validParams&invalidUserData",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"johndoe@gmail.com\",\n\t\"playground\": \"2019A.kariv\",\n\t\"username\": \"\",\n\t\"avatar\": \"\",\n\t\"role\": \"\",\n\t\"points\": 0\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users/2019A.kariv/johndoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users",
+						"2019A.kariv",
+						"johndoe@work.com"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "editAccount_invalidParams&validUserData",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"johndoe@gmail.com\",\n\t\"playground\": \"2019A.kariv\",\n\t\"username\": \"updatedJohnDoe\",\n\t\"avatar\": \"https://www.blogtyrant.com/gravatar.jpg\",\n\t\"role\": \"player\",\n\t\"points\": 0\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/users/notrealplayground/johndoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"users",
+						"notrealplayground",
+						"johndoe@work.com"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "createElement_validParams&validElementData&validManager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"Fox\",\n\t\"creationDate\": \"2019-11-05 09:15:00\",\n\t\"expirationDate\": \"2019-12-05 09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/janedoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"janedoe@work.com"
+					]
+				},
+				"description": "response must contain:\n{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"fox1\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"Fox\",\n\t\"creationDate\": \"2019-11-05'T'09:15:00\",\n\t\"expirationDate\": \"2019-12-05'T'09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "createElement_invalidParams&validElementData&validManager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"Fox\",\n\t\"creationDate\": \"2019-11-05 09:15:00\",\n\t\"expirationDate\": \"2019-12-05 09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/someplayground/janedoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"someplayground",
+						"janedoe@work.com"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "createElement_validParams&invalidElementData&validManager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"\",\n\t\"creationDate\": \"2019-11-05 09:15:00\",\n\t\"expirationDate\": \"2019-12-05 09:15:00\",\n\t\"type\": \"\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/janedoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"janedoe@work.com"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "createElement_validParams&validElementData&invalidManager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"Fox\",\n\t\"creationDate\": \"2019-11-05 09:15:00\",\n\t\"expirationDate\": \"2019-12-05 09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/johndoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"johndoe@work.com"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "editElement_validParams&validElementData&validManager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"fox1\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"updatedFoxDoe\",\n\t\"creationDate\": \"2019-11-05 09:15:00\",\n\t\"expirationDate\": \"2020-05-05 09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/janedoe@work.com/2019A.kariv/fox1",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"janedoe@work.com",
+						"2019A.kariv",
+						"fox1"
+					]
+				},
+				"description": "response must contain code 200."
+			},
+			"response": []
+		},
+		{
+			"name": "editElement_invalidParams&validElementData&validManager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"fox1\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"updatedFoxDoe\",\n\t\"creationDate\": \"2019-11-05 09:15:00\",\n\t\"expirationDate\": \"2020-05-05 09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/janedoe@work.com/2019A.kariv/nonexistingfox",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"janedoe@work.com",
+						"2019A.kariv",
+						"nonexistingfox"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "editElement_validParams&invalidElementData&validManager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"fox1\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"\",\n\t\"creationDate\": \"2019-11-05 09:15:00\",\n\t\"expirationDate\": \"2020-05-05 09:15:00\",\n\t\"type\": \"\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/janedoe@work.com/2019A.kariv/fox1",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"janedoe@work.com",
+						"2019A.kariv",
+						"fox1"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "editElement_validParams&validElementData&invalidManager",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3467cb7-0408-4a21-824f-531b252a6ffb",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"fox1\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"updatedFoxDoe\",\n\t\"creationDate\": \"2019-11-05 09:15:00\",\n\t\"expirationDate\": \"2020-05-05 09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/johndoe@work.com/2019A.kariv/fox1",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"2019A.kariv",
+						"fox1"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "viewElement_validParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/johndoe@work.com/2019A.kariv/fox1",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"2019A.kariv",
+						"fox1"
+					]
+				},
+				"description": "response must contain:\n{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"fox1\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"Fox\",\n\t\"creationDate\": \"2019-11-05'T'09:15:00\",\n\t\"expirationDate\": \"2019-12-05'T'09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "viewElement_invalidParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/johndoe@work.com/2019A.kariv/nonexistingfox",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"2019A.kariv",
+						"nonexistingfox"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "viewAllElements_validParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/johndoe@work.com/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"all"
+					]
+				},
+				"description": "response must contain:\n[\n {\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"fox1\",\n\t\"location\": {\n\t\t\"x\": \"14.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"Fox\",\n\t\"creationDate\": \"2019-11-05'T'09:15:00\",\n\t\"expirationDate\": \"2019-12-05'T'09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"apple\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n },\n {\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"fox2\",\n\t\"location\": {\n\t\t\"x\": \"16.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"FoxDoe\",\n\t\"creationDate\": \"2019-11-05'T'09:15:00\",\n\t\"expirationDate\": \"2019-12-05'T'09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"bananana\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n }\n]"
+			},
+			"response": []
+		},
+		{
+			"name": "viewAllElements_invalidParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/nonexistingplayground/johndoe@work.com/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"nonexistingplayground",
+						"johndoe@work.com",
+						"all"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "viewNearbyElements_validParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/johndoe@work.com/near/16/2/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"near",
+						"16",
+						"2",
+						"1"
+					]
+				},
+				"description": "[\n    {\n        \"playground\": \"2019A.kariv\",\n        \"id\": \"fox2\",\n        \"location\": {\n            \"x\": 17,\n            \"y\": 2\n        },\n        \"name\": \"FoxDoe\",\n        \"creationDate\": \"2019-12-05T07:15:00.000+0000\",\n        \"expirationDate\": \"2020-01-05T07:15:00.000+0000\",\n        \"type\": \"animal\",\n        \"attributes\": {\n            \"size\": 10,\n            \"favoriteFood\": [\n                \"orange\",\n                \"bananana\"\n            ]\n        },\n        \"creatorPlayground\": \"2019A.kariv\",\n        \"creatorEmail\": \"janedoe@work.com\"\n    }\n]"
+			},
+			"response": []
+		},
+		{
+			"name": "viewNearbyElements_invalidParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/johndoe@work.com/near/16/2/-s",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"near",
+						"16",
+						"2",
+						"-s"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "viewElementsByValue_validParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/johndoe@work.com/search/size/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"search",
+						"size",
+						"10"
+					]
+				},
+				"description": "response must contain:\n{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"fox2\",\n\t\"location\": {\n\t\t\"x\": \"16.0\",\n\t\t\"y\": \"2.0\"\n\t},\n\t\"name\": \"FoxDoe\",\n\t\"creationDate\": \"2019-11-05'T'09:15:00\",\n\t\"expirationDate\": \"2019-12-05'T'09:15:00\",\n\t\"type\": \"animal\",\n\t\"attributes\": {\n\t\t\"size\": \"10\",\n\t\t\"favoriteFood\": [\"orange\", \"bananana\"]\n\t},\n\t\"creatorPlayground\": \"2019A.kariv\",\n\t\"creatorEmail\": \"janedoe@work.com\"\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "viewElementsByValue_invalidParams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8085/playground/elements/2019A.kariv/johndoe@work.com/search/notsize/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"elements",
+						"2019A.kariv",
+						"johndoe@work.com",
+						"search",
+						"notsize",
+						"10"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		},
+		{
+			"name": "createActivity_validParams&validElementData",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"\",\n\t\"elementPlayground\": \"2019A.kariv\",\n\t\"elementId\": \"fox1\",\n\t\"type\": \"feeding\",\n\t\"playerPlayground\": \"2019A.kariv\",\n\t\"playerEmail\": \"johndoe@work.com\",\n\t\"attributes\": {\n\t\t\"scoreUp\": \"10\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/activities/2019A.kariv/johndoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"activities",
+						"2019A.kariv",
+						"johndoe@work.com"
+					]
+				},
+				"description": "response must contain:\n{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"feeding1\",\n\t\"elementPlayground\": \"2019A.kariv\",\n\t\"elementId\": \"fox1\",\n\t\"type\": \"feeding\",\n\t\"playerPlayground\": \"2019A.kariv\",\n\t\"playerEmail\": \"johndoe@work.com\",\n\t\"attributes\": {\n\t\t\"scoreUp\": \"10\"\n\t}\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "createActivity_invalidParams&validElementData",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"\",\n\t\"elementPlayground\": \"2019A.kariv\",\n\t\"elementId\": \"fox1\",\n\t\"type\": \"feeding\",\n\t\"playerPlayground\": \"2019A.kariv\",\n\t\"playerEmail\": \"johndoe@work.com\",\n\t\"attributes\": {\n\t\t\"scoreUp\": \"10\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/activities/2019A.kariv/noone@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"activities",
+						"2019A.kariv",
+						"noone@work.com"
+					]
+				},
+				"description": "response must contain status 500."
+			},
+			"response": []
+		},
+		{
+			"name": "createActivity_validParams&invalidElementData",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"playground\": \"2019A.kariv\",\n\t\"id\": \"\",\n\t\"elementPlayground\": \"2019A.kariv\",\n\t\"elementId\": \"\",\n\t\"type\": \"\",\n\t\"playerPlayground\": \"2019A.kariv\",\n\t\"playerEmail\": \"johndoe@work.com\",\n\t\"attributes\": {\n\t\t\"scoreUp\": \"10\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "localhost:8085/playground/activities/2019A.kariv/johndoe@work.com",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"playground",
+						"activities",
+						"2019A.kariv",
+						"johndoe@work.com"
+					]
+				},
+				"description": "response must contain code 500."
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,44 @@
+<div id="editProfileViewTemplate" ng-controller="EditProfileController">
+  <ng-include src="'./app/components/menuBar/menuBarView.ejs'">
+    <!-- Menu Bar -->
+  </ng-include>
+  <ng-include src="'./app/components/alert/alertView.ejs'">
+    <!-- Alert message, if any -->
+  </ng-include>
+  <div class="row">
+    <div class="col col-sm-3">
+
+    </div>
+    <div class="col col-sm-6">
+      <form class="inputForm" name="editProfileForm" id="editProfileForm" action="javascript:void(0)">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="text" class="form-control inputField" name="email" id="email" placeholder="i.e. johndoe@work.com" ng-model="user.email">
+        </div>
+        <div class="form-group">
+          <label for="playground">Playground</label>
+          <input type="text" class="form-control inputField" name="playground" id="playground" placeholder="i.e. 2019A.kariv" ng-model="user.playground">
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control inputField" name="username" id="username" placeholder="i.e. John Doe" ng-model="user.username">
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+          <input type="text" class="form-control inputField" name="role" id="role" placeholder="i.e. player, manager" ng-model="user.role">
+        </div>
+        <div class="form-group">
+          <label for="avatar">Avatar</label>
+          <input type="text" class="form-control inputField" name="avatar" id="avatar" placeholder="i.e. male, female" ng-model="user.avatar">
+        </div>
+        <div class="form-group">
+          <hr>
+          <button class="btn btn-info submitButton" ng-click="updateProfile()">Submit updated data</button>
+        </div>
+      </form>  
+    </div>
+    <div class="col col-sm-3">
+      
+    </div>
+  </div>
+</div>

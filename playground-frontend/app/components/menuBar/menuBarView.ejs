@@ -1,0 +1,48 @@
+<div id="menuBarViewTemplate" ng-controller="MenuBarController">
+  <nav class="navbar justify-content-center" id="menuNav">
+    <div ng-if="showUserMenu">
+      <ul class="nav nav-pills">
+          <li class="nav-item justifiedToIcon">
+            <button type="button" class="btn menuOption" ng-click="logout()">Logout</button>
+          </li>
+          <li class="nav-item justifiedToIcon">
+            <a href="/#!/edit_profile">
+              <button type="button" class="btn menuOption">
+                Edit profile
+              </button>
+            </a>
+          </li>
+          <li class="nav-item justifiedToIcon">
+            <a href="/#!/message_board">
+              <button type="button" class="btn menuOption">
+                Message board
+              </button>
+            </a>
+          </li>
+          <li class="nav-item" id="userInfo">
+            <img class="userIcon" id="userIconMenuBar" src="../../../assets/img/{{user.avatar}}UserIcon.png" alt="userIcon">
+            <p class="userDetail">Welcome, {{user.username}}!</p>
+            <p ng-if="user.role == 'player'" class="userDetail">Your score : {{user.points}}</p>
+          </li>
+        </ul>
+    </div>
+    <div ng-if="!showUserMenu">
+      <ul class="nav nav-pills">
+        <li class="nav-item justifiedToIcon">
+          <a href="/#!/signup">
+            <button type="button" class="btn menuOption">Signup</button>
+          </a>
+        </li>
+        <li class="nav-item justifiedToIcon">
+          <a href="/#!/login">
+            <button type="button" class="btn menuOption">Login</button>
+          </a>
+        </li>
+        <li class="nav-item" id="userInfo">
+          <img class="userIcon" id="guestIcon" src="../../../assets/img/guestIcon.png" alt="guestIcon">
+          <p class="userDetail">Welcome, Guest!</p>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

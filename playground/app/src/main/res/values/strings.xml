@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Playground</string>
+    <string name="playground">PLAYGROUND</string>
+    <string name="playground_name">2019A.kariv</string>
+    <string name="register"><u>REGISTER</u></string>
+    <string name="login">LOGIN</string>
+    <string name="email">EMAIL</string>
+    <string name="registration">REGISTRATION</string>
+    <string name="submit">submit</string>
+</resources>

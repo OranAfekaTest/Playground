@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>2019A.kariv playground</title>
+  <!-- CSS stylesheets -->
+  <link rel="stylesheet" type="text/css" href="../assets/bootstrap-4.1.3-css/bootstrap-grid.min.css">
+  <link rel="stylesheet" type="text/css" href="../assets/bootstrap-4.1.3-css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/shared.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/menuBar.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/alert.css">
+  <link rel="stylesheet" type="text/css" href="../assets/css/playground.css">
+  <!-- Javascript Callbacks -->
+  <script type="text/javascript" src="./app/shared/jsCallbacks/jsCallbacks.js"></script>
+  <!-- Angular Components-->
+  <script type="text/javascript" src="./node_modules/angular/angular.js"></script>
+  <script type="text/javascript" src="./node_modules/angular-route/angular-route.js"></script>
+  <script type="text/javascript" src="./node_modules/angular-loader/angular-loader.js"></script>
+  <!-- Playground Angular Components-->
+  <script type="text/javascript" src="./app/appController.js"></script>
+  <script type="text/javascript" src="./app/shared/services/userService.js"></script>
+  <script type="text/javascript" src="./app/shared/services/alertMessageService.js"></script>
+  <script type="text/javascript" src="./app/components/alert/alertController.js"></script>
+  <script type="text/javascript" src="./app/components/menuBar/menuBarController.js"></script>
+  <script type="text/javascript" src="./app/components/login/loginController.js"></script>
+  <script type="text/javascript" src="./app/components/register/registerController.js"></script>
+  <script type="text/javascript" src="./app/components/editProfile/editProfileController.js"></script>
+  <script type="text/javascript" src="./app/components/playground/playgroundController.js"></script>
+  <script type="text/javascript" src="./app/components/messageBoard/messageBoardController.js"></script>
+</head>
+<body>
+  <div ng-app="PlaygroundApp" ng-controller="MainController">
+    <div ng-view>
+      <!-- Components are rendered in here -->
+    </div>
+  </div> 
+</body>
+</html>

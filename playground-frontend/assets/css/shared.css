@@ -1,0 +1,49 @@
+body {
+  overflow: auto;
+  color: rgb(239, 215, 184);
+  background: url('../img/bodyBackground.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.invisible {
+  display: none;
+}
+
+.secondLayer {
+  z-index: 1;
+  position: absolute;
+  width: 50rem;
+}
+
+.userIcon {
+  max-width: 50px;
+}
+
+.form-control {
+  color: #ffffff;
+  background-color: rgba(8, 31, 53, 0.75);
+  border: 1px solid rgb(206, 212, 218);
+  font-size: 0.9em;
+}
+
+.form-group hr {
+  max-width: 100%;
+  border: 1;
+  border-top: 1px solid rgb(206, 212, 218);
+}
+
+.submitButton {
+  width: 100%;
+}
+
+.btn-info {
+  background-color: #17a2b88f;
+  border: none;
+  font-size: 0.9em;
+}
+.btn-warning {
+  background-color: rgba(255, 193, 7, 0.67);
+  border: none;
+  font-size: 0.9em;
+}

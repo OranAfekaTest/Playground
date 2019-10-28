@@ -1,0 +1,40 @@
+#tableWithElements .card {
+  background-color: rgba(27, 135, 144, 0.36);
+  width: 100%;
+}
+#tableWithElements .inputForm {
+  margin-left: 10em;
+  margin-right: 10em;
+}
+#tableWithElements .card {
+  padding-bottom: 0.5em;
+  width: 24rem;
+}
+#tableWithElements .elementIcon {
+  object-fit: contain;
+  max-height: 200px;
+}
+#tableWithElements .submitButton {
+  width:        90%;
+  margin-left:  1.35em;
+  margin-right: 1em;
+}
+#tableWithElements .optionsOnElement {
+  display: inline-block;
+}
+#tableWithElements .optionsOnElement .managerOption {
+  width: 90%;
+  margin-left: 1.35em;
+  margin-right: 1em;
+}
+#tableWithElements .optionsOnElement .playerOption {
+  width: 40%;
+  margin-left: 1.35em;
+  margin-right: 1em;
+}
+#optionsOnTable {
+  margin-top: 2em;
+}
+.firstLayerBarelySeen {
+  opacity: 0.1;
+}

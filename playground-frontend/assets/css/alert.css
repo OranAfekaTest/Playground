@@ -1,0 +1,12 @@
+#alertMessageContainer {
+  border-radius: 5rem;
+  border-style: solid;
+}
+.alertMessageContainerError {
+  background-color: rgba(255, 84, 110, 0.6);
+  border-color: rgb(199, 102, 52);
+}
+.alertMessageContainerOk {
+  background-color: rgba(165, 182, 68, 0.6);
+  border-color: rgba(165, 182, 68);
+}
