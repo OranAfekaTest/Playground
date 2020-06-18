@@ -23,7 +23,7 @@
   "author": "Sabina Alderot, Betty Shimonov, Oran Cohen, Rotem Kariv, Maxim Chanturiay",
   "license": "MIT",
   "dependencies": {
-    "angular": "^1.7.5",
+    "angular": "^1.8.0",
     "angular-loader": "^1.7.5",
     "angular-route": "^1.7.5",
     "body-parser": "^1.18.3",
